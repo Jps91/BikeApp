@@ -1,20 +1,120 @@
 // BikeApp.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
 //
 
+
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <sstream>>
+
+void extract()
+{
+	std::fstream inputFile{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC.csv", std::ios::in };
+	if (!inputFile)
+	{
+		std::cerr << "could not open ACC.csv";
+	}
+	std::fstream outputFile{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_OUT.csv", std::ios::trunc | std::ios::out};
+	if (!outputFile)
+	{
+		std::cerr << "could not open OutputFile";
+	}
+	unsigned long t_Android = 0;
+	unsigned long t_unix = 0;
+	float x = 0;
+	float y = 0;
+	float z = 0;
+	int a = 0;
+	char notANumber[1] = {};
+	while (inputFile.get(notANumber[0]))
+	{
+		if (notANumber[0] == ';')
+		{
+			outputFile << " ";
+		}
+		else if (notANumber[0] == '3')
+		{
+			;
+		}
+		else
+		{
+
+			outputFile << notANumber[0];
+		}
+	}
+	outputFile.close();
+	outputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_OUT.csv", std::ios::in);
+	std::fstream result("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_RESULT.csv", std::ios::trunc|std::ios::out);
+	if (!outputFile)
+	{
+		std::cerr << "could not open OutputFile";
+	}
+	char part1[64] = {};
+	char part2[64] = {};
+	char values[64] = {};
+	char lastValues[64] = {};
+	outputFile.getline(part1, sizeof(part1));
+	bool check = true;
+	while (check)
+	{
+		if (outputFile.get(part1, ';'))
+		{
+			check = false;
+		}
+		if (outputFile.get(part2, ';'))
+		{
+			check = false;
+		}
+		if (outputFile.get(values, '\n'))
+		{
+			check = false;
+		}
+		if (values != lastValues)
+		{
+			result << part1 << " " << part2 << " " << values << "\n";
+			for (size_t i = 0; i < sizeof(values); i++)
+			{
+				lastValues[i] = values[i];
+				values[i] = { 0 };
+			}
+		}
+	}
+	result.close();
+};
+
+void stage2()
+{
+	std::fstream outputFile;
+	outputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_OUT.csv", std::ios::in);
+	std::fstream result("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_RESULT.csv", std::ios::trunc | std::ios::out);
+	if (!outputFile)
+	{
+		std::cerr << "could not open OutputFile";
+	}
+	std::string part1;
+	std::string part2[64] = {};
+	std::string values[64] = {};
+	std::string lastValues[64] = {};
+	bool check = true;
+	while (check)
+	{
+		
+		if (values != lastValues)
+		{
+			result << part1 << " " << part2 << " " << values << "\n";
+
+		}
+	}
+	result.close();
+}
+
+
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	//extract();
+	stage2();
 }
 
-// Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"
-// Programm debuggen: F5 oder "Debuggen" > Menü "Debuggen starten"
-
-// Tipps für den Einstieg: 
-//   1. Verwenden Sie das Projektmappen-Explorer-Fenster zum Hinzufügen/Verwalten von Dateien.
-//   2. Verwenden Sie das Team Explorer-Fenster zum Herstellen einer Verbindung mit der Quellcodeverwaltung.
-//   3. Verwenden Sie das Ausgabefenster, um die Buildausgabe und andere Nachrichten anzuzeigen.
-//   4. Verwenden Sie das Fenster "Fehlerliste", um Fehler anzuzeigen.
-//   5. Wechseln Sie zu "Projekt" > "Neues Element hinzufügen", um neue Codedateien zu erstellen, bzw. zu "Projekt" > "Vorhandenes Element hinzufügen", um dem Projekt vorhandene Codedateien hinzuzufügen.
-//   6. Um dieses Projekt später erneut zu öffnen, wechseln Sie zu "Datei" > "Öffnen" > "Projekt", und wählen Sie die SLN-Datei aus.
