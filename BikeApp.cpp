@@ -8,6 +8,12 @@
 #include <vector>
 #include <sstream>>
 
+#include <stdlib.h>
+#include <stdio.h>
+
+
+
+
 void extract()
 {
 	std::fstream inputFile{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC.csv", std::ios::in };
@@ -45,7 +51,7 @@ void extract()
 	}
 	outputFile.close();
 	outputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_OUT.csv", std::ios::in);
-	std::fstream result("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_RESULT.csv", std::ios::trunc|std::ios::out);
+	std::fstream result("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_RESULT.csv", std::ios::trunc | std::ios::out);
 	if (!outputFile)
 	{
 		std::cerr << "could not open OutputFile";
@@ -86,25 +92,43 @@ void extract()
 void stage2()
 {
 	std::fstream outputFile;
-	outputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_OUT.csv", std::ios::in);
-	std::fstream result("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_RESULT.csv", std::ios::trunc | std::ios::out);
+	outputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_OUT.csv", std::ios::in|std::ios::out);
+	std::fstream result("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_RESULT.csv", std::ios::trunc | std::ios::out| std::ios::in);
 	if (!outputFile)
 	{
 		std::cerr << "could not open OutputFile";
 	}
-	std::string part1;
-	std::string part2[64] = {};
-	std::string values[64] = {};
-	std::string lastValues[64] = {};
-	bool check = true;
-	while (check)
-	{
-		
-		if (values != lastValues)
-		{
-			result << part1 << " " << part2 << " " << values << "\n";
+	long long nano = 0;
+	 long long timeSec = 0;
+	_CRT_DOUBLE x;
+	_CRT_DOUBLE y ;
+	_CRT_DOUBLE z ;
+	int mode = 0;
+	char nothing1[1]={};
+	char nothing2[2]={};
+	char nothing3[2]={};
+	char nothing4[2]={};
+	char nothing5[2]={};
+	char nothing6[2] = {};
 
-		}
+	char inputVlaue[32] = {};
+	int returnValue = 0;
+	while (!outputFile.eof())
+	{
+		outputFile.getline(inputVlaue,sizeof(inputVlaue),' ');
+		nano = atoll(inputVlaue);
+		outputFile.getline(inputVlaue,sizeof(inputVlaue),' ');
+		timeSec= atoll(inputVlaue);
+		outputFile.getline(inputVlaue,sizeof(inputVlaue),' ');
+		returnValue = _atodbl(&x,inputVlaue);
+		outputFile.getline(inputVlaue,sizeof(inputVlaue),' ');
+		returnValue = _atodbl(&y, inputVlaue);
+		outputFile.getline(inputVlaue,sizeof(inputVlaue),' ');
+		returnValue = _atodbl(&z, inputVlaue);
+		outputFile.getline(inputVlaue, sizeof(inputVlaue));
+		mode = atoi(inputVlaue);
+		result << nano << " " << timeSec << " " << x.x << " " << y.x << " " << z.x << std::endl;
+
 	}
 	result.close();
 }
