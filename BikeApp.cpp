@@ -190,12 +190,11 @@ int main()
 	{
 		std::cerr << "AUA";
 	}
-	std::cout << acc.entries<<std::endl;
-	for (size_t j = 0; j < acc.time.size(); j++)
+	std::cout << acc.entries << std::endl;
+	for (size_t i=0; i < acc.entries; i++)
 	{
-			std::cout << acc.px[j].x << std::endl;
-		
-		
+		//std::cout << acc.p[i].x << std::endl;		
+		//std::cout << acc.v[i].x << std::endl;		
 	}
 
 }

@@ -55,7 +55,7 @@ ACC::ACC(std::string filePath)
 
 
 	speed();
-
+	position();
 }
 
 bool ACC::isGood()
@@ -71,17 +71,17 @@ int ACC::getLine(long long* time_nano_seconds, double* x, double* y, double* z)
 
 void ACC::speed()
 {
-	vx.resize(time.size() + 1);
-	vy.resize(time.size() + 1);
-	vz.resize(time.size() + 1);
-	v.resize(time.size() + 1);
+	vx.resize(entries + 1);
+	vy.resize(entries + 1);
+	vz.resize(entries + 1);
+	v.resize(entries + 1);
 
-	for (size_t i = 0; i < time.size() - 1; i++)
+	for (size_t i = 0; i < entries - 1; i++)
 	{
 		vx[i + 1].x = vx[i].x + ((ax[i].x + ax[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
 		vy[i + 1].x = vy[i].x + ((ay[i].x + ay[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
 		vz[i + 1].x = vz[i].x + ((az[i].x + az[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
-		v[i + 1].x = vx[i + 1].x + vy[i + 1].x + vz[i + 1].x;
+		v[i + 1].x = sqrt(pow(vx[i + 1].x, 2) + pow(vy[i + 1].x, 2) + pow(vz[i + 1].x, 2));
 	}
 }
 
@@ -94,7 +94,18 @@ void ACC::position()
 
 	for (size_t i = 0; i < time.size() - 1; i++)
 	{
-		px[i + 1].x = px[i].x + (static_cast<double>(1) / 4) * (ax[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]), 2);
+		px[i + 1].x = px[i].x + (static_cast<double>(1) / 2) * (ax[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
+		py[i + 1].x = py[i].x + (static_cast<double>(1) / 2) * (ay[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
+		pz[i + 1].x = pz[i].x + (static_cast<double>(1) / 2) * (az[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
+		p[i + 1].x = abs(px[i + 1].x) + abs(py[i + 1].x) + abs(pz[i + 1].x);
+		
+		
+		/*
+		px[i + 1].x = px[i].x + (static_cast<double>(1) / 4) * (ax[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
+		py[i + 1].x = py[i].x + (static_cast<double>(1) / 4) * (ay[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
+		pz[i + 1].x = pz[i].x + (static_cast<double>(1) / 4) * (az[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
+		p[i + 1].x = px[i + 1].x + py[i + 1].x + pz[i + 1].x;
+		*/
 	}
 }
 
@@ -102,4 +113,13 @@ void ACC::position()
 
 ACC::~ACC()
 {
+	std::fstream file{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_Log.csv", std::ios::trunc|std::ios::out};
+	for (size_t i = 0; i < entries; i++)
+	{
+		file<<i<<" " << vx[i].x << " " << vy[i].x << " " << vz[i].x << std::endl;
+		/*
+		file << vx[i].x <<"," << vy[i].x << "," << vz[i].x << "," << v[i].x << ","
+			<< px[i].x << "," << py[i].x << "," << pz[i].x << "," << p[i].x << std::endl;*/
+	}
+	file.close();
 }
