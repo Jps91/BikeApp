@@ -16,10 +16,10 @@ ACC::ACC(std::string filePath)
 	inputFile.close();
 
 	time.resize(entries + 1);
-	ax.resize(entries + 1);
-	ay.resize(entries + 1);
-	az.resize(entries + 1);
-	a.resize(entries + 1);
+	agx.resize(entries + 1);
+	agy.resize(entries + 1);
+	agz.resize(entries + 1);
+	ag.resize(entries + 1);
 
 	//inputFile.open(filePathNameCombined(&filePath, &fileName_m), std::ios::in);
 	inputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC.csv", std::ios::in);
@@ -44,10 +44,10 @@ ACC::ACC(std::string filePath)
 		if (i < entries)
 		{
 			time[i] = atoll(value_time);
-			retValue = _atodbl(&ax[i], value_x);
-			retValue = _atodbl(&ay[i], value_y);
-			retValue = _atodbl(&ay[i], value_z);
-			a[i].x = ax[i].x + ay[i].x + az[i].x;
+			retValue = _atodbl(&agx[i], value_x);
+			retValue = _atodbl(&agy[i], value_y);
+			retValue = _atodbl(&agy[i], value_z);
+			ag[i].x = agx[i].x + agy[i].x + agz[i].x;
 		}
 		i++;
 	}
@@ -71,20 +71,19 @@ int ACC::getLine(long long* time_nano_seconds, double* x, double* y, double* z)
 
 void ACC::speed()
 {
-	vx.resize(time.size() + 1);
-	vy.resize(time.size() + 1);
-	vz.resize(time.size() + 1);
-	v.resize(time.size() + 1);
+	vgx.resize(time.size() + 1);
+	vgy.resize(time.size() + 1);
+	vgz.resize(time.size() + 1);
+	vg.resize(time.size() + 1);
 
 	for (size_t i = 0; i < time.size() - 1; i++)
 	{
-		vx[i + 1].x = vx[i].x + ((ax[i].x + ax[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
-		vy[i + 1].x = vy[i].x + ((ay[i].x + ay[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
-		vz[i + 1].x = vz[i].x + ((az[i].x + az[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
-		v[i + 1].x = vx[i + 1].x + vy[i + 1].x + vz[i + 1].x;
+		vgx[i + 1].x = vgx[i].x + ((agx[i].x + agx[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
+		vgy[i + 1].x = vgy[i].x + ((agy[i].x + agy[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
+		vgz[i + 1].x = vgz[i].x + ((agz[i].x + agz[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
+		vg[i + 1].x = vgx[i + 1].x + vgy[i + 1].x + vgz[i + 1].x;
 	}
 }
-
 
 
 

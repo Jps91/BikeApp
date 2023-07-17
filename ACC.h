@@ -12,15 +12,17 @@ class ACC
 public:
 	std::vector<long long> time;
 
-	std::vector<_CRT_DOUBLE>a;
-	std::vector<_CRT_DOUBLE>ax;
-	std::vector<_CRT_DOUBLE>ay;
-	std::vector<_CRT_DOUBLE>az;
+	//With Gravity;
+	std::vector<_CRT_DOUBLE>ag;
+	std::vector<_CRT_DOUBLE>agx;
+	std::vector<_CRT_DOUBLE>agy;
+	std::vector<_CRT_DOUBLE>agz;
 
-	std::vector<_CRT_DOUBLE>v;
-	std::vector<_CRT_DOUBLE>vx;
-	std::vector<_CRT_DOUBLE>vy;
-	std::vector<_CRT_DOUBLE>vz;
+	std::vector<_CRT_DOUBLE>vg;
+	std::vector<_CRT_DOUBLE>vgx;
+	std::vector<_CRT_DOUBLE>vgy;
+	std::vector<_CRT_DOUBLE>vgz;
+
 
 	ACC(std::string filePath);
 	bool isGood();
@@ -34,5 +36,6 @@ private:
 	long long currentTime;
 	bool status = true;
 	void speed();
+
 };
 

@@ -193,7 +193,11 @@ int main()
 	std::cout << acc.entries<<std::endl;
 	for (int i = 0; i < acc.ax.size(); i++)
 	{
-		std::cout << acc.v[i].x<<std::endl;
+		if (i % 20 == 0)
+		{
+			std::cout << acc.ag[i].x << "	->	";
+			std::cout << acc.a[i].x << std::endl;
+		}
 	}
 
 }
