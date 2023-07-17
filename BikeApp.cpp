@@ -191,9 +191,9 @@ int main()
 		std::cerr << "AUA";
 	}
 	std::cout << acc.entries<<std::endl;
-	for (int i = 0; i < acc.x.size(); i++)
+	for (int i = 0; i < acc.ax.size(); i++)
 	{
-		std::cout << acc.x[i].x<<" ";
+		std::cout << acc.v[i].x<<std::endl;
 	}
 
 }
