@@ -47,10 +47,11 @@ DataManipulator::DataManipulator()
 
 }
 
-void DataManipulator::accGraph()
+void DataManipulator::compress()
 {
-	
+
 }
+
 
 DataManipulator::~DataManipulator()
 {

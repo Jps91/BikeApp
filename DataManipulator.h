@@ -8,9 +8,7 @@ class DataManipulator
 public:
 	DataManipulator();
 	std::string inputFolderName;
-	void accGraph();
-	void velocGraph();
-	void posGraph();
+	void compress();
 	~DataManipulator();
 
 private:

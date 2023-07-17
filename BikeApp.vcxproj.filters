@@ -21,10 +21,24 @@
     <ClCompile Include="DataManipulator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="ACC.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataManipulator.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="ACC.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BikeApp.rc">
+      <Filter>Ressourcendateien</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
