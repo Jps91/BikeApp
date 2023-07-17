@@ -94,9 +94,9 @@ void ACC::position()
 
 	for (size_t i = 0; i < time.size() - 1; i++)
 	{
-		px[i + 1].x = px[i].x + (static_cast<double>(1) / 2) * (ax[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
-		py[i + 1].x = py[i].x + (static_cast<double>(1) / 2) * (ay[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
-		pz[i + 1].x = pz[i].x + (static_cast<double>(1) / 2) * (az[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
+		px[i + 1].x = px[i].x + (static_cast<double>(1) / 4) * (ax[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
+		py[i + 1].x = py[i].x + (static_cast<double>(1) / 4) * (ay[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
+		pz[i + 1].x = pz[i].x + (static_cast<double>(1) / 4) * (az[i + 1].x - ax[i].x) * pow((time[i + 1] - time[i]) / (pow(10, 9)), 2);
 		p[i + 1].x = abs(px[i + 1].x) + abs(py[i + 1].x) + abs(pz[i + 1].x);
 		
 		
