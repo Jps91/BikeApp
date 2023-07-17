@@ -13,15 +13,20 @@ public:
 	std::vector<long long> time;
 
 	//With Gravity;
-	std::vector<_CRT_DOUBLE>ag;
-	std::vector<_CRT_DOUBLE>agx;
-	std::vector<_CRT_DOUBLE>agy;
-	std::vector<_CRT_DOUBLE>agz;
+	std::vector<_CRT_DOUBLE>a;
+	std::vector<_CRT_DOUBLE>ax;
+	std::vector<_CRT_DOUBLE>ay;
+	std::vector<_CRT_DOUBLE>az;
 
-	std::vector<_CRT_DOUBLE>vg;
-	std::vector<_CRT_DOUBLE>vgx;
-	std::vector<_CRT_DOUBLE>vgy;
-	std::vector<_CRT_DOUBLE>vgz;
+	std::vector<_CRT_DOUBLE>v;
+	std::vector<_CRT_DOUBLE>vx;
+	std::vector<_CRT_DOUBLE>vy;
+	std::vector<_CRT_DOUBLE>vz;
+
+	std::vector<_CRT_DOUBLE>p;
+	std::vector<_CRT_DOUBLE>px;
+	std::vector<_CRT_DOUBLE>py;
+	std::vector<_CRT_DOUBLE>pz;
 
 
 	ACC(std::string filePath);
@@ -35,7 +40,8 @@ private:
 	std::string fileName_m = "ACC.csv";
 	long long currentTime;
 	bool status = true;
+	
 	void speed();
-
+	void position();
 };
 

@@ -191,13 +191,11 @@ int main()
 		std::cerr << "AUA";
 	}
 	std::cout << acc.entries<<std::endl;
-	for (int i = 0; i < acc.ax.size(); i++)
+	for (size_t j = 0; j < acc.time.size(); j++)
 	{
-		if (i % 20 == 0)
-		{
-			std::cout << acc.ag[i].x << "	->	";
-			std::cout << acc.a[i].x << std::endl;
-		}
+			std::cout << acc.px[j].x << std::endl;
+		
+		
 	}
 
 }
