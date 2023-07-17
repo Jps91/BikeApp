@@ -1,9 +1,9 @@
-#include "ACC.h"
+#include "ACG.h"
 
-ACC::ACC(std::string filePath)
+ACG::ACG(std::string filePath)
 {
 	//std::fstream inputFile{filePathNameCombined(&filePath, &fileName_m), std::ios::in};
-	std::fstream inputFile{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC.csv", std::ios::in};
+	std::fstream inputFile{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACG.csv", std::ios::in};
 	if (!inputFile)
 	{
 		status = false;
@@ -22,7 +22,7 @@ ACC::ACC(std::string filePath)
 	a.resize(entries + 1);
 
 	//inputFile.open(filePathNameCombined(&filePath, &fileName_m), std::ios::in);
-	inputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC.csv", std::ios::in);
+	inputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACG.csv", std::ios::in);
 	if (!inputFile)
 	{
 		status = false;
@@ -58,18 +58,18 @@ ACC::ACC(std::string filePath)
 	position();
 }
 
-bool ACC::isGood()
+bool ACG::isGood()
 {
 	return status;
 }
 
-int ACC::getLine(long long* time_nano_seconds, double* x, double* y, double* z)
+int ACG::getLine(long long* time_nano_seconds, double* x, double* y, double* z)
 {
 	//currentTime = time_nano;
 	return 0;
 }
 
-void ACC::speed()
+void ACG::speed()
 {
 	vx.resize(entries + 1);
 	vy.resize(entries + 1);
@@ -85,7 +85,7 @@ void ACC::speed()
 	}
 }
 
-void ACC::position()
+void ACG::position()
 {
 	px.resize(time.size() + 1);
 	py.resize(time.size() + 1);
@@ -111,9 +111,9 @@ void ACC::position()
 
 
 
-ACC::~ACC()
+ACG::~ACG()
 {
-	std::fstream file{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC_Log.csv", std::ios::trunc | std::ios::out};
+	std::fstream file{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACG_Log.csv", std::ios::trunc | std::ios::out};
 	int loadingbar = round(static_cast<float>(entries) / 100);
 	for (size_t i = 0; i < entries; i++)
 	{
@@ -121,7 +121,7 @@ ACC::~ACC()
 		if (i % loadingbar == 0)
 		{
 			system("CLS");
-			std::cout << "Saving ACC_log.csv File: " << 100 * static_cast<float>(i) / entries << "%";
+			std::cout << "Saving ACG_log.csv File: " << 100 * static_cast<float>(i) / entries << "%";
 		}
 		/*
 		file << vx[i].x <<"," << vy[i].x << "," << vz[i].x << "," << v[i].x << ","

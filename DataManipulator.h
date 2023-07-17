@@ -12,8 +12,8 @@ public:
 	~DataManipulator();
 
 private:
-	
-	
+
+
 
 	std::fstream lineraAccelerometer{};
 	std::string lineraAccelerometerFileName = "ACC.csv";

@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 #include "ACC.h"
-
+#include "ACG.h"
 
 void extract()
 {
@@ -186,15 +186,38 @@ int main()
 	//stage2();
 	//gettimediff();
 	ACC acc("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\");
+	ACG acg("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\");
+	if (!acg.isGood())
+	{
+		std::cerr << "AUA";
+	}
+	std::cout << acg.entries << std::endl;
+	int loadingbaracg = round(static_cast<float>(acg.entries) / 100);
+	for (size_t i = 0; i < acg.entries; i++)
+	{
+		if (i % loadingbaracg == 0)
+		{
+			system("CLS");
+			std::cout << "Loading ACG: " << 100 * static_cast<float>(i) / acg.entries << "%";
+		}
+		//std::cout << ac.p[i].x << std::endl;		
+		//std::cout << acg.v[i].x << std::endl;		
+	}
 	if (!acc.isGood())
 	{
 		std::cerr << "AUA";
 	}
 	std::cout << acc.entries << std::endl;
-	for (size_t i=0; i < acc.entries; i++)
+	int loadingbaracc = round(static_cast<float>(acc.entries) / 100);
+	for (size_t i = 0; i < acc.entries; i++)
 	{
-		//std::cout << acc.p[i].x << std::endl;		
-		//std::cout << acc.v[i].x << std::endl;		
+		if (i % loadingbaracc == 0)
+		{
+			system("CLS");
+			std::cout << "Loading ACC: " << 100 * static_cast<float>(i) / acc.entries << "%";
+		}
+		//std::cout << ac.p[i].x << std::endl;		
+		//std::cout << acg.v[i].x << std::endl;		
 	}
 
 }

@@ -7,11 +7,12 @@
 #include <iostream>
 
 
-class ACC
+class ACG
 {
 public:
 	std::vector<long long> time;
 
+	//With Gravity;
 	std::vector<_CRT_DOUBLE>a;
 	std::vector<_CRT_DOUBLE>ax;
 	std::vector<_CRT_DOUBLE>ay;
@@ -28,15 +29,15 @@ public:
 	std::vector<_CRT_DOUBLE>pz;
 
 
-	ACC(std::string filePath);
+	ACG(std::string filePath);
 	bool isGood();
 	int getLine(long long* time_nano_seconds, double* x, double* y, double* z);
 
 	//bool setByTime(long long time_nano_seconds);
 	long long entries = 0;
-	~ACC();
+	~ACG();
 private:
-	std::string fileName_m = "ACC.csv";
+	std::string fileName_m = "ACG.csv";
 	long long currentTime;
 	bool status = true;
 

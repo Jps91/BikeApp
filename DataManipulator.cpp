@@ -17,7 +17,7 @@ DataManipulator::DataManipulator()
 	lineraAccelerometer.open(lineraAccelerometerFileName);
 	if (!lineraAccelerometer)
 	{
-		std::cout << "Could not open" << lineraAccelerometerFileName<<std::endl;
+		std::cout << "Could not open" << lineraAccelerometerFileName << std::endl;
 	}
 	accelerometer.open(accelerometerFileName);
 	if (!accelerometer)
