@@ -15,6 +15,7 @@
 #include "ACG.h"
 #include "GPS.h"
 #include "GYRO.h"
+#include "MAGNET.h"
 
 void extract()
 {

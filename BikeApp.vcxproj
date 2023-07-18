@@ -134,6 +134,7 @@
     <ClCompile Include="DataManipulator.cpp" />
     <ClCompile Include="GPS.cpp" />
     <ClCompile Include="GYRO.cpp" />
+    <ClCompile Include="MAGNET.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ACC.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="DataManipulator.h" />
     <ClInclude Include="GPS.h" />
     <ClInclude Include="GYRO.h" />
+    <ClInclude Include="MAGNET.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
