@@ -37,6 +37,7 @@ public:
 	~ACC();
 private:
 	std::string fileName_m = "ACC.csv";
+	
 	long long currentTime;
 	bool status = true;
 

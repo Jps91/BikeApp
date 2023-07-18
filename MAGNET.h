@@ -8,13 +8,13 @@
 class MAGNET
 {
 public:
-	std::vector<long long> time;
+	std::vector<_CRT_DOUBLE> time;
 
 	std::vector<_CRT_DOUBLE>x;
 	std::vector<_CRT_DOUBLE>y;
 	std::vector<_CRT_DOUBLE>z;
-	MAGNET();
-
+	MAGNET(std::string);
+	void store();
 	long long entries = 0;
 private:
 	std::string fileName_m = "MAGNET.csv";

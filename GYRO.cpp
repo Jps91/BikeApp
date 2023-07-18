@@ -1,8 +1,8 @@
 #include "GYRO.h"
 
-GYRO::GYRO()
+GYRO::GYRO(std::string filePath)
 {
-	std::fstream inputFile{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\GYRO.csv", std::ios::in};
+	std::fstream inputFile{filePath + fileName_m, std::ios::in};
 	if (!inputFile)
 	{
 		status = false;
@@ -20,7 +20,7 @@ GYRO::GYRO()
 	z.resize(entries + 1);
 
 	//inputFile.open(filePathNameCombined(&filePath, &fileName_m), std::ios::in);
-	inputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\GYRO.csv", std::ios::in);
+	inputFile.open(filePath + fileName_m, std::ios::in);
 	if (!inputFile)
 	{
 		status = false;
@@ -29,19 +29,16 @@ GYRO::GYRO()
 	char value_x[64];
 	char value_y[64];
 	char value_z[64];
-	char nothing[64];
 	size_t i = 0;
 	int retValue = 0;
 	while (inputFile.getline(value_time, sizeof(value_time), ';')
-		&& inputFile.getline(nothing, sizeof(nothing), ';')
 		&& inputFile.getline(value_x, sizeof(value_x), ';')
 		&& inputFile.getline(value_y, sizeof(value_y), ';')
-		&& inputFile.getline(value_z, sizeof(value_z), ';')
-		&& inputFile.getline(nothing, sizeof(nothing)))
+		&& inputFile.getline(value_z, sizeof(value_z)))
 	{
 		if (i < entries)
 		{
-			time[i] = atoll(value_time);
+			retValue = _atodbl(&time[i], value_time);
 			retValue = _atodbl(&x[i], value_x);
 			retValue = _atodbl(&y[i], value_y);
 			retValue = _atodbl(&z[i], value_z);

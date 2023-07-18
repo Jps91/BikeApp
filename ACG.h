@@ -10,7 +10,7 @@
 class ACG
 {
 public:
-	std::vector<long long> time;
+	std::vector<_CRT_DOUBLE> time;
 
 	//With Gravity;
 	std::vector<_CRT_DOUBLE>a;
@@ -32,12 +32,12 @@ public:
 	ACG(std::string filePath);
 	bool isGood();
 	int getLine(long long* time_nano_seconds, double* x, double* y, double* z);
-
+	void store();
 	//bool setByTime(long long time_nano_seconds);
 	long long entries = 0;
 	~ACG();
 private:
-	std::string fileName_m = "ACG.csv";
+	std::string fileName_m = "Accelerometer.csv";
 	long long currentTime;
 	bool status = true;
 

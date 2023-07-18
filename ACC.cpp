@@ -3,7 +3,7 @@
 ACC::ACC(std::string filePath)
 {
 	//std::fstream inputFile{filePathNameCombined(&filePath, &fileName_m), std::ios::in};
-	std::fstream inputFile{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC.csv", std::ios::in};
+	std::fstream inputFile{filePath + fileName_m, std::ios::in};
 	if (!inputFile)
 	{
 		status = false;
@@ -22,7 +22,7 @@ ACC::ACC(std::string filePath)
 	a.resize(entries + 1);
 
 	//inputFile.open(filePathNameCombined(&filePath, &fileName_m), std::ios::in);
-	inputFile.open("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\ACC.csv", std::ios::in);
+	inputFile.open(filePath + fileName_m, std::ios::in);
 	if (!inputFile)
 	{
 		status = false;

@@ -10,18 +10,19 @@
 class GPS
 {
 public:
-	std::vector<long long> time;
-	std::vector<float> latitude;
-	std::vector<float> longitude;
+	std::vector<_CRT_DOUBLE> time;
+	std::vector<_CRT_DOUBLE> latitude;
+	std::vector<_CRT_DOUBLE> longitude;
 	std::vector<_CRT_DOUBLE> altitude;
-	std::vector<float> accuracy;
-	std::vector<float> speed;
-	std::vector<float> bearing;
+	std::vector<_CRT_DOUBLE> speed;
+	std::vector<_CRT_DOUBLE> bearing;
+	std::vector<_CRT_DOUBLE> horizontalAccuracy;
+	std::vector<_CRT_DOUBLE> verticalAccuracy;
 	long long entries = 0;
-	GPS();
+	GPS(std::string);
 	~GPS();
 private:
-	std::string fileName_m = "GPS.csv";
+	std::string fileName_m = "Location.csv";
 	bool status = true;
 };
 

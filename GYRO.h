@@ -9,16 +9,16 @@
 class GYRO
 {
 public:
-	std::vector<long long> time;
+	std::vector<_CRT_DOUBLE> time;
 
 	std::vector<_CRT_DOUBLE>x;
 	std::vector<_CRT_DOUBLE>y;
 	std::vector<_CRT_DOUBLE>z;
 	long long entries = 0;
-	GYRO();
+	GYRO(std::string);
 
 private:
-	std::string fileName_m = "GRYO.csv";
+	std::string fileName_m = "Gyroscope.csv";
 	bool status = true;
 };
 
