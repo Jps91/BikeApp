@@ -203,6 +203,7 @@ int main()
 		//std::cout << ac.p[i].x << std::endl;		
 		//std::cout << acg.v[i].x << std::endl;		
 	}
+	/*
 	if (!acc.isGood())
 	{
 		std::cerr << "AUA";
@@ -219,6 +220,6 @@ int main()
 		//std::cout << ac.p[i].x << std::endl;		
 		//std::cout << acg.v[i].x << std::endl;		
 	}
-
+	*/
 }
 

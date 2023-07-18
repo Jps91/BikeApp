@@ -41,6 +41,7 @@ private:
 	long long currentTime;
 	bool status = true;
 
+	void betterspeed();
 	void speed();
 	void position();
 };

@@ -54,7 +54,7 @@ ACG::ACG(std::string filePath)
 	inputFile.close();
 
 
-	speed();
+	betterspeed();
 	position();
 }
 
@@ -67,6 +67,22 @@ int ACG::getLine(long long* time_nano_seconds, double* x, double* y, double* z)
 {
 	//currentTime = time_nano;
 	return 0;
+}
+
+void ACG::betterspeed()
+{
+	vx.resize(entries + 1);
+	vy.resize(entries + 1);
+	vz.resize(entries + 1);
+	v.resize(entries + 1);
+
+	for (size_t i = 0; i < entries - 1; i++)
+	{
+		vx[i + 1].x = vx[i].x + ((ax[i].x + ax[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
+		vy[i + 1].x = vy[i].x + ((ay[i].x + ay[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
+		vz[i + 1].x = vz[i].x + ((az[i].x + az[i + 1].x) / 2) * ((time[i + 1] - time[i]) / (pow(10, 9)));
+		v[i + 1].x = sqrt(pow(vx[i + 1].x, 2) + pow(vy[i + 1].x, 2) + pow(vz[i + 1].x, 2));
+	}
 }
 
 void ACG::speed()
