@@ -71,6 +71,9 @@ int ACG::getLine(long long* time_nano_seconds, double* x, double* y, double* z)
 
 void ACG::betterspeed()
 {
+	//To Do fix Gravity
+
+
 	vx.resize(entries + 1);
 	vy.resize(entries + 1);
 	vz.resize(entries + 1);

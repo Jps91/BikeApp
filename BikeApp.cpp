@@ -13,6 +13,8 @@
 
 #include "ACC.h"
 #include "ACG.h"
+#include "GPS.h"
+#include "GYRO.h"
 
 void extract()
 {
@@ -185,6 +187,7 @@ int main()
 	//extract();
 	//stage2();
 	//gettimediff();
+	/*
 	ACC acc("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\");
 	ACG acg("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\");
 	if (!acg.isGood())
@@ -202,7 +205,7 @@ int main()
 		}
 		//std::cout << ac.p[i].x << std::endl;		
 		//std::cout << acg.v[i].x << std::endl;		
-	}
+	}*/
 	/*
 	if (!acc.isGood())
 	{
@@ -221,5 +224,19 @@ int main()
 		//std::cout << acg.v[i].x << std::endl;		
 	}
 	*/
+	GYRO gyro;
+	int loadingbaracg = round(static_cast<float>(gyro.entries) / 100);
+	for (size_t i = 0; i < gyro.entries; i++)
+	{
+		if (i % loadingbaracg == 0)
+		{
+			system("CLS");
+			std::cout << "Loading ACG: " << 100 * static_cast<float>(i) / gyro.entries << "%";
+			std::cout << gyro.x[i].x;
+		}
+		//std::cout << ac.p[i].x << std::endl;		
+		//std::cout << acg.v[i].x << std::endl;		
+	}
+
 }
 
