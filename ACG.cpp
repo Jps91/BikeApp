@@ -6,7 +6,7 @@ ACG::ACG(std::string filePath)
 	std::fstream inputFile{filePath + fileName_m, std::ios::in};
 	if (!inputFile)
 	{
-		status = false;
+		std::cout << "Could not open File:" << filePath+fileName_m<<std::endl;
 	}
 	char someData[256]{};
 	while (inputFile.getline(someData, sizeof(someData)))
@@ -95,11 +95,11 @@ void ACG::betterspeed()
 	vz.resize(entries + 1);
 	v.resize(entries + 1);
 
-	for (size_t i = 0; i < entries - 1; i++)
+	for (size_t i = 0; i <entries - 1; i++)
 	{
-		vx[i + 1].x = vx[i].x + ((ax[i].x + ax[i + 1].x) / 2) * ((time[i + 1].x - time[i].x) / (pow(10, 9)));
-		vy[i + 1].x = vy[i].x + ((ay[i].x + ay[i + 1].x) / 2) * ((time[i + 1].x - time[i].x) / (pow(10, 9)));
-		vz[i + 1].x = vz[i].x + ((az[i].x + az[i + 1].x) / 2) * ((time[i + 1].x - time[i].x) / (pow(10, 9)));
+		vx[i + 1].x = vx[i].x + ((ax[i].x + ax[i + 1].x) / 2) * ((time[i + 1].x - time[i].x));
+		vy[i + 1].x = vy[i].x + ((ay[i].x + ay[i + 1].x) / 2) * ((time[i + 1].x - time[i].x));
+		vz[i + 1].x = vz[i].x + ((az[i].x + az[i + 1].x) / 2) * ((time[i + 1].x - time[i].x));
 		v[i + 1].x = sqrt(pow(vx[i + 1].x, 2) + pow(vy[i + 1].x, 2) + pow(vz[i + 1].x, 2));
 	}
 }
@@ -148,4 +148,5 @@ void ACG::position()
 
 ACG::~ACG()
 {
+	;
 }

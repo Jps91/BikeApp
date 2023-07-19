@@ -34,7 +34,7 @@ public:
 	int getLine(long long* time_nano_seconds, double* x, double* y, double* z);
 	void store();
 	//bool setByTime(long long time_nano_seconds);
-	long long entries = 0;
+	unsigned long long entries = 0;
 	~ACG();
 private:
 	std::string fileName_m = "Accelerometer.csv";

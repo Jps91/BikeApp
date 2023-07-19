@@ -14,7 +14,7 @@ public:
 	std::vector<_CRT_DOUBLE>x;
 	std::vector<_CRT_DOUBLE>y;
 	std::vector<_CRT_DOUBLE>z;
-	long long entries = 0;
+	size_t entries = 0;
 	GYRO(std::string);
 
 private:

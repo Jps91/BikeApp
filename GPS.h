@@ -18,7 +18,7 @@ public:
 	std::vector<_CRT_DOUBLE> bearing;
 	std::vector<_CRT_DOUBLE> horizontalAccuracy;
 	std::vector<_CRT_DOUBLE> verticalAccuracy;
-	long long entries = 0;
+	size_t entries = 0;
 	GPS(std::string);
 	~GPS();
 private:

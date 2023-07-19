@@ -32,12 +32,10 @@ MAGNET::MAGNET(std::string filePath)
 	char nothing[64];
 	size_t i = 0;
 	int retValue = 0;
-	while (inputFile.getline(value_time, sizeof(value_time), ';')
-		&& inputFile.getline(nothing, sizeof(nothing), ';')
-		&& inputFile.getline(value_x, sizeof(value_x), ';')
-		&& inputFile.getline(value_y, sizeof(value_y), ';')
-		&& inputFile.getline(value_z, sizeof(value_z), ';')
-		&& inputFile.getline(nothing, sizeof(nothing)))
+	while (inputFile.getline(value_time, sizeof(value_time), '	')
+		&& inputFile.getline(value_x, sizeof(value_x), '	')
+		&& inputFile.getline(value_y, sizeof(value_y), '	')
+		&& inputFile.getline(value_z, sizeof(value_z)))
 	{
 		if (i < entries)
 		{

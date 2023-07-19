@@ -226,12 +226,17 @@ int main()
 		//std::cout << acg.v[i].x << std::endl;		
 	}
 	*/
-	MAGNET mag("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\");
 	//mag.store();
-	ACG acg("C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\");
-	for (size_t i = 0; i < acg.entries; i++)
+	ACG acc("\\\\DESKTOP-D42KUL4\\No_skript\\My Experiment 2023-07-18 17-14-16\\");
+	for (size_t i = 0; i < acc.entries; i++)
 	{
-		std::cout<<acg.a[i].x<<std::endl;
+		std::cout << acc.a[i].x << std::endl;
+	}
+
+	MAGNET mag("\\\\DESKTOP-D42KUL4\\No_skript\\My Experiment 2023-07-18 17-14-16\\");
+	for (size_t i = 0; i < mag.entries; i++)
+	{
+		std::cout << mag.y[i].x << std::endl; 
 	}
 
 }
