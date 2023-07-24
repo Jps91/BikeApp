@@ -20,6 +20,7 @@ public:
 	std::vector<_CRT_DOUBLE> verticalAccuracy;
 	size_t entries = 0;
 	GPS(std::string);
+	void terrain();
 	~GPS();
 private:
 	std::string fileName_m = "Location.csv";
