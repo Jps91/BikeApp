@@ -17,6 +17,7 @@
 #include "GYRO.h"
 #include "MAGNET.h"
 
+#include "DcmAlgorithm.h"
 
 void extract()
 {
@@ -205,8 +206,8 @@ int main()
 			system("CLS");
 			std::cout << "Loading ACG: " << 100 * static_cast<float>(i) / acg.entries << "%";
 		}
-		//std::cout << ac.p[i].x << std::endl;		
-		//std::cout << acg.v[i].x << std::endl;		
+		//std::cout << ac.p[i].x << std::endl;
+		//std::cout << acg.v[i].x << std::endl;
 	}*/
 	/*
 	if (!acc.isGood())
@@ -222,22 +223,65 @@ int main()
 			system("CLS");
 			std::cout << "Loading ACC: " << 100 * static_cast<float>(i) / acc.entries << "%";
 		}
-		//std::cout << ac.p[i].x << std::endl;		
-		//std::cout << acg.v[i].x << std::endl;		
+		//std::cout << ac.p[i].x << std::endl;
+		//std::cout << acg.v[i].x << std::endl;
 	}
 	*/
 	//mag.store();
-	ACG acc("\\\\DESKTOP-D42KUL4\\No_skript\\My Experiment 2023-07-18 17-14-16\\");
-	for (size_t i = 0; i < acc.entries; i++)
-	{
-		std::cout << acc.a[i].x << std::endl;
-	}
+	std::string folder("My Experiment 2023-07-24 16-25-34");
 
-	MAGNET mag("\\\\DESKTOP-D42KUL4\\No_skript\\My Experiment 2023-07-18 17-14-16\\");
+	std::string path("\\\\DESKTOP-D42KUL4\\No_skript\\" + folder + "\\");
+
+	
+	//ACG acc(path);
+	//for (size_t i = 0; i < acc.entries; i++)
+	{
+		//std::cout << acc.a[i].x << std::endl;
+	}
+	MAGNET mag(path);
+	//ACG acg(path);
+	//GYRO gyro(path);
+	/*for (size_t i = 0; i < mag.entries; i++)
+	{
+		std::cout << mag.xAngle[i].x << std::endl;
+		std::cout << mag.yAngle[i].x << std::endl;
+		std::cout << mag.zAngle[i].x << std::endl;
+		std::cout  << std::endl;
+	}*/
+	//mag.store();
+	//DcmAlgorithm dc{};
+	//int gtime = gyro.entries / mag.entries;
+	//int acgtime = acg.entries / mag.entries;
 	for (size_t i = 0; i < mag.entries; i++)
 	{
-		std::cout << mag.y[i].x << std::endl; 
-	}
+		/*
+		if (i * gtime < gyro.entries && i * acgtime < acg.entries)
 
+		{
+			dc.update(mag.time[i].x, gyro.x[i * gtime].x, gyro.y[i * gtime].x, gyro.z[i * gtime].x, acg.ax[i * acgtime].x, acg.ay[i * acgtime].x, acg.az[i * acgtime].x, mag.x[i].x, mag.y[i].x, mag.z[i].x);
+			std::cout << dc.getPitch()<<std::endl;
+			std::cout << dc.getRoll()<<std::endl;
+			std::cout << dc.getYaw()<<std::endl;
+			std::cout <<std::endl;
+		}*/
+		//std::cout << abs(mag.x[i].x) + abs(mag.y[i].x) + abs(mag.z[i].x) << std::endl;
+
+	}
+	mag.calibrate();
+	std::cout << mag.xlow.x << "	" << mag.xhigh.x << std::endl;
+	std::cout << mag.ylow.x << "	" << mag.yhigh.x << std::endl;
+	std::cout << mag.zlow.x << "	" << mag.zhigh.x << std::endl;
+	std::cout << std::endl;
+	std::cout << mag.xhio.x << std::endl;
+	std::cout << mag.yhio.x << std::endl;
+	std::cout << mag.zhio.x << std::endl;
+	std::cout << std::endl;
+	std::cout << mag.avergaeDistance.x << std::endl;
+	//system("pause");
+	mag.rotationToNoth();
+	mag.store();
+	
+	GPS gps(path);
+	gps.terrain();
 }
 

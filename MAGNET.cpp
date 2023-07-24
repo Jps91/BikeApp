@@ -29,7 +29,6 @@ MAGNET::MAGNET(std::string filePath)
 	char value_x[64];
 	char value_y[64];
 	char value_z[64];
-	char nothing[64];
 	size_t i = 0;
 	int retValue = 0;
 	while (inputFile.getline(value_time, sizeof(value_time), '	')
@@ -39,7 +38,7 @@ MAGNET::MAGNET(std::string filePath)
 	{
 		if (i < entries)
 		{
-			retValue = _atodbl(&time[i],value_time);
+			retValue = _atodbl(&time[i], value_time);
 			retValue = _atodbl(&x[i], value_x);
 			retValue = _atodbl(&y[i], value_y);
 			retValue = _atodbl(&z[i], value_z);
@@ -49,16 +48,70 @@ MAGNET::MAGNET(std::string filePath)
 	inputFile.close();
 }
 
+void MAGNET::rotationToNoth()
+{
+
+	xAngle.resize(entries + 1);
+	yAngle.resize(entries + 1);
+	zAngle.resize(entries + 1);
+	/*
+	for (size_t i = 0; i < entries; i++)
+	{
+		xAngle[i].x = pow(sin((1 + x[i].x) / sqrtOf3WithPower(x[i],y[i],z[i]).x), -1);
+		yAngle[i].x = pow(sin((1 + y[i].x) / sqrtOf3WithPower(x[i],y[i],z[i]).x), -1);
+		zAngle[i].x = pow(sin((1 + z[i].x) / sqrtOf3WithPower(x[i],y[i],z[i]).x), -1);
+	}*/
+
+	//second Take:
+	/*
+	for (size_t i = 0; i < entries; i++)
+	{
+		xAngle[i].x = atan(x[i].x / (sqrt(pow(y[i].x, 2) + pow(z[i].x, 2))));
+		yAngle[i].x = atan(y[i].x / (sqrt(pow(x[i].x, 2) + pow(z[i].x, 2))));
+		zAngle[i].x = atan((sqrt(pow(x[i].x, 2) + pow(y[i].x, 2))) / z[i].x);
+
+	}
+	*/
+
+
+	//third Take:
+	for (size_t i = 0; i < entries; i++)
+	{
+		zAngle[i].x = -1 * (atan2(yc[i].x, xc[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510);
+		if (zAngle[i].x < 0)
+		{
+			zAngle[i].x += 360;
+		}
+		yAngle[i].x = -1 * (atan2(zc[i].x, xc[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510);
+		if (yAngle[i].x < 0)
+		{
+			yAngle[i].x += 360;
+		}
+		xAngle[i].x = -1 * (atan2(zc[i].x, yc[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510);
+		if (xAngle[i].x < 0)
+		{
+			xAngle[i].x += 360;
+		}
+		//yAngle[i].x = atan2(y[i].x, z[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510;
+		//zAngle[i].x = atan2(z[i].x, x[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510;
+
+	}
+}
+
 void MAGNET::store()
 {
 	std::fstream file{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\MAGNET_Log.csv", std::ios::trunc | std::ios::out};
 	int loadingbar = round(static_cast<float>(entries) / 100);
-	for (size_t i = 0; i < entries-1; i++)
+	//double a = 1;
+	//double b = 1;
+	//double c = 1;
+	for (size_t i = 0; i < entries -1; i++)
 	{
-		if (x[i].x != x[i+1].x || y[i].x != y[i+1].x || z[i].x != z[i+1].x)
-		{
-			file << time[i+1].x << " " << x[i+1].x << " " << y[i+1].x << " " << z[i+1].x << std::endl;
-		}
+			file << time[i].x << " " << x[i].x << " " << y[i].x << " " << z[i].x << " "
+				<< xc[i ].x << " " << yc[i ].x << " " << zc[i ].x << " "
+				<< xAngle[i].x << " " << yAngle[i].x << " " << zAngle[i].x << std::endl;
+			//file << time[i + 1].x << " " << xc[i + 1].x << " " << yc[i + 1].x << " " << zc[i + 1].x  << std::endl;
+		
 
 		if (i % loadingbar == 0)
 		{
@@ -70,4 +123,91 @@ void MAGNET::store()
 			<< px[i].x << "," << py[i].x << "," << pz[i].x << "," << p[i].x << std::endl;*/
 	}
 	file.close();
+}
+
+
+
+void MAGNET::calibrate()
+{
+	//Rotate in all posible direct
+
+
+
+	//Hard Iron correction:y
+
+	for (size_t i = 0; i < entries - 1; i++)
+	{
+		if (xlow.x > x[i + 1].x)
+		{
+			xlow.x = x[i + 1].x;
+		}
+		if (xhigh.x < x[i + 1].x)
+		{
+			xhigh.x = x[i + 1].x;
+		}
+
+		if (ylow.x > y[i + 1].x)
+		{
+			ylow.x = y[i + 1].x;
+		}
+		if (yhigh.x < y[i + 1].x)
+		{
+			yhigh.x = y[i + 1].x;
+		}
+
+		if (zlow.x > z[i + 1].x)
+		{
+			zlow.x = z[i + 1].x;
+		}
+		if (zhigh.x < z[i + 1].x)
+		{
+			zhigh.x = z[i + 1].x;
+		}
+	}
+
+	xhio.x = (xlow.x + xhigh.x) / 2;
+	yhio.x = (ylow.x + yhigh.x) / 2;
+	zhio.x = (zlow.x + zhigh.x) / 2;
+
+	for (size_t i = 0; i < entries; i++)
+	{
+		x[i].x -= xhio.x;
+		y[i].x -= yhio.x;
+		z[i].x -= zhio.x;
+	}
+
+
+	//Soft Iron Calib:
+	elipsoidDistance.resize(entries + 1);
+	for (size_t i = 0; i < entries - 1; i++)
+	{
+		elipsoidDistance[i] = sqrtOf3WithPower(x[i], y[i], z[i]);
+	}
+	_CRT_DOUBLE sum{};
+	for (size_t i = 0; i < entries - 1; i++)
+	{
+		sum.x += elipsoidDistance[i].x;
+	}
+	avergaeDistance.x = sum.x / entries;
+
+	xc.resize(entries + 1);
+	yc.resize(entries + 1);
+	zc.resize(entries + 1);
+	for (size_t i = 0; i < entries - 1; i++)
+	{
+		xc[i].x = avergaeDistance.x * (1 / elipsoidDistance[i].x) * x[i].x;
+		yc[i].x = avergaeDistance.x * (1 / elipsoidDistance[i].x) * y[i].x;
+		zc[i].x = avergaeDistance.x * (1 / elipsoidDistance[i].x) * z[i].x;
+	}
+}
+
+
+
+
+
+_CRT_DOUBLE MAGNET::sqrtOf3WithPower(_CRT_DOUBLE X, _CRT_DOUBLE Y, _CRT_DOUBLE Z)
+{
+	_CRT_DOUBLE result{};
+	result.x = sqrt((pow(X.x, 2) + pow(Y.x, 2) + pow(Z.x, 2)));
+	return result;
 }
