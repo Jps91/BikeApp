@@ -132,6 +132,7 @@
     <ClCompile Include="ACG.cpp" />
     <ClCompile Include="BikeApp.cpp" />
     <ClCompile Include="DataManipulator.cpp" />
+    <ClCompile Include="DcmAlgorithm.cpp" />
     <ClCompile Include="GPS.cpp" />
     <ClCompile Include="GYRO.cpp" />
     <ClCompile Include="MAGNET.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="ACC.h" />
     <ClInclude Include="ACG.h" />
     <ClInclude Include="DataManipulator.h" />
+    <ClInclude Include="DcmAlgorithm.h" />
     <ClInclude Include="GPS.h" />
     <ClInclude Include="GYRO.h" />
     <ClInclude Include="MAGNET.h" />

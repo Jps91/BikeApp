@@ -2,12 +2,12 @@
 
 GPS::GPS(std::string filePath)
 {
-	//std::fstream inputFile{filePathNameCombined(&filePath, &fileName_m), std::ios::in};
 	std::fstream inputFile{filePath + fileName_m, std::ios::in};
 	if (!inputFile)
 	{
 		status = false;
 	}
+
 	char someData[256]{};
 	while (inputFile.getline(someData, sizeof(someData)))
 	{
@@ -24,7 +24,6 @@ GPS::GPS(std::string filePath)
 	horizontalAccuracy.resize(entries + 1);
 	verticalAccuracy.resize(entries + 1);
 
-	//inputFile.open(filePathNameCombined(&filePath, &fileName_m), std::ios::in);
 	inputFile.open(filePath + fileName_m, std::ios::in);
 	if (!inputFile)
 	{
@@ -34,7 +33,6 @@ GPS::GPS(std::string filePath)
 	char lat[64];
 	char lon[64];
 	char alt[64];
-	//char acc[64];
 	char spee[64];
 	char bear[64];
 	char hacc[64];
