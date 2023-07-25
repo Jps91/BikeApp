@@ -232,7 +232,7 @@ int main()
 
 	std::string path("\\\\DESKTOP-D42KUL4\\No_skript\\" + folder + "\\");
 
-	
+
 	//ACG acc(path);
 	//for (size_t i = 0; i < acc.entries; i++)
 	{
@@ -280,8 +280,11 @@ int main()
 	//system("pause");
 	mag.rotationToNoth();
 	mag.store();
-	
+
 	GPS gps(path);
 	gps.terrain();
+	GYRO gyro(path);
+	gyro.positon();
+	gyro.store();
 }
 
