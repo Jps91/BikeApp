@@ -1,6 +1,6 @@
 #include "GYRO.h"
 
-GYRO::GYRO(std::string filePath)
+GYRO::GYRO(std::string filePath, double xAngle, double yAngle, double zAngel)
 {
 	std::fstream inputFile{filePath + fileName_m, std::ios::in};
 	if (!inputFile)
@@ -47,28 +47,42 @@ GYRO::GYRO(std::string filePath)
 	inputFile.close();
 }
 
-void GYRO::positon()
+void GYRO::rotation()
 {
-	xp.resize(entries + 1);
-	yp.resize(entries + 1);
-	zp.resize(entries + 1);
+	yaw.resize(entries + 1);
+	pitch.resize(entries + 1);
+	roll.resize(entries + 1);
 
-	for (size_t i = 0; i < entries - 1; i++)
+	for (size_t i = 1; i < entries ; i++)
 	{
-		xp[i].x = (((x[i + 1].x * 180) / 3.14159265358979323846264338327950288419716939937510)) * (time[i + 1].x - time[i].x) + xp[i].x;
-		if (xp[i].x < 0)
+		pitch[i].x = x[i ].x * (time[i ].x - time[i-1].x) + pitch[i-1].x;
+		if (pitch[i].x < 0)
 		{
-			xp[i].x += 360;
+			pitch[i].x += (2 * pi);
 		}
-		yp[i].x = (((y[i + 1].x * 180) / 3.14159265358979323846264338327950288419716939937510)) * (time[i + 1].x - time[i].x) + yp[i].x;
-		if (yp[i].x < 0)
+		if (pitch[i].x > 2 * pi)
 		{
-			yp[i].x += 360;
+			pitch[i].x = pitch[i].x - (2 * pi);
 		}
-		zp[i].x = (((z[i + 1].x * 180) / 3.14159265358979323846264338327950288419716939937510)) * (time[i + 1].x - time[i].x) + z[i].x;
-		if (zp[i].x < 0)
+
+		roll[i].x = y[i].x * (time[i].x - time[i-1].x) + roll[i-1].x;
+		if (roll[i].x < 0)
 		{
-			zp[i].x += 360;
+			roll[i].x += (2 * pi);
+		}
+		if (roll[i].x > (2 * pi))
+		{
+			roll[i].x = roll[i].x - (2 * pi);
+		}
+
+		yaw[i].x = z[i].x * (time[i].x - time[i-1].x) + yaw[i-1].x;
+		if (yaw[i].x < 0)
+		{
+			yaw[i].x += (2 * pi);
+		}
+		if (yaw[i].x > (2 * pi))
+		{
+			yaw[i].x = yaw[i].x - (2 * pi);
 		}
 	}
 
@@ -80,7 +94,7 @@ void GYRO::store()
 	int loadingbar = round(static_cast<float>(entries) / 100);
 	for (size_t i = 0; i < entries - 1; i++)
 	{
-		file << time[i].x << "	" << xp[i].x << " " << yp[i].x << " " << zp[i].x << std::endl;
+		file << time[i].x << "	" << pitch[i].x << " " << roll[i].x << " " << yaw[i].x << std::endl;
 
 
 		if (i % loadingbar == 0)
