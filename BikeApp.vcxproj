@@ -133,19 +133,35 @@
     <ClCompile Include="BikeApp.cpp" />
     <ClCompile Include="DataManipulator.cpp" />
     <ClCompile Include="DcmAlgorithm.cpp" />
+    <ClCompile Include="FastAverage.cpp" />
+    <ClCompile Include="FastAverageDouble.cpp" />
     <ClCompile Include="GPS.cpp" />
     <ClCompile Include="GYRO.cpp" />
     <ClCompile Include="MAGNET.cpp" />
+    <ClCompile Include="MeanFilter.cpp" />
+    <ClCompile Include="MeanFilterDouble.cpp" />
+    <ClCompile Include="Noise.cpp" />
+    <ClCompile Include="Position.cpp" />
+    <ClCompile Include="Rotaion.cpp" />
+    <ClCompile Include="VectorEditor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ACC.h" />
     <ClInclude Include="ACG.h" />
     <ClInclude Include="DataManipulator.h" />
     <ClInclude Include="DcmAlgorithm.h" />
+    <ClInclude Include="FastAverage.h" />
+    <ClInclude Include="FastAverageDouble.h" />
     <ClInclude Include="GPS.h" />
     <ClInclude Include="GYRO.h" />
     <ClInclude Include="MAGNET.h" />
+    <ClInclude Include="MeanFilter.h" />
+    <ClInclude Include="MeanFilterDouble.h" />
+    <ClInclude Include="Noise.h" />
+    <ClInclude Include="Position.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Rotaion.h" />
+    <ClInclude Include="VectorEditor.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BikeApp.rc" />

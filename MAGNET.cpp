@@ -51,9 +51,9 @@ MAGNET::MAGNET(std::string filePath)
 void MAGNET::rotationToNoth()
 {
 
-	xAngle.resize(entries + 1);
-	yAngle.resize(entries + 1);
-	zAngle.resize(entries + 1);
+	xAngle_Roll.resize(entries + 1);
+	yAngle_Pitch.resize(entries + 1);
+	zAngle_Yaw.resize(entries + 1);
 	/*
 	for (size_t i = 0; i < entries; i++)
 	{
@@ -77,21 +77,24 @@ void MAGNET::rotationToNoth()
 	//third Take:
 	for (size_t i = 0; i < entries; i++)
 	{
-		zAngle[i].x = -1 * (atan2(yc[i].x, xc[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510);
-		if (zAngle[i].x < 0)
+		zAngle_Yaw[i].x = -1 * (atan2(yc[i].x, xc[i].x));
+		/*if (zAngle_Yaw[i].x >(2 * pi))
 		{
-			zAngle[i].x += 360;
-		}
-		yAngle[i].x = -1 * (atan2(zc[i].x, xc[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510);
-		if (yAngle[i].x < 0)
+			zAngle_Yaw[i].x -= (2 * pi);
+		}*/
+		yAngle_Pitch[i].x = -1 * (atan2(zc[i].x, xc[i].x));
+		/*if (yAngle_Pitch[i].x > (2 * pi))
 		{
-			yAngle[i].x += 360;
-		}
-		xAngle[i].x = -1 * (atan2(zc[i].x, yc[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510);
-		if (xAngle[i].x < 0)
+			yAngle_Pitch[i].x -= (2 * pi);
+		}*/
+		xAngle_Roll[i].x = -1 * (atan2(zc[i].x, yc[i].x));
+		/*if (xAngle_Roll[i].x > (2 * pi))
 		{
-			xAngle[i].x += 360;
-		}
+			xAngle_Roll[i].x -= (2 * pi);
+		}*/
+		//x=Roll
+		//y=Pitch
+		//	z=yaw
 		//yAngle[i].x = atan2(y[i].x, z[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510;
 		//zAngle[i].x = atan2(z[i].x, x[i].x) * 180 / 3.14159265358979323846264338327950288419716939937510;
 
@@ -105,13 +108,13 @@ void MAGNET::store()
 	//double a = 1;
 	//double b = 1;
 	//double c = 1;
-	for (size_t i = 0; i < entries -1; i++)
+	for (size_t i = 0; i < entries - 1; i++)
 	{
-			file << time[i].x << " " << x[i].x << " " << y[i].x << " " << z[i].x << " "
-				<< xc[i ].x << " " << yc[i ].x << " " << zc[i ].x << " "
-				<< xAngle[i].x << " " << yAngle[i].x << " " << zAngle[i].x << std::endl;
-			//file << time[i + 1].x << " " << xc[i + 1].x << " " << yc[i + 1].x << " " << zc[i + 1].x  << std::endl;
-		
+		file << time[i].x << " " << x[i].x << " " << y[i].x << " " << z[i].x << " "
+			<< xc[i].x << " " << yc[i].x << " " << zc[i].x << " "
+			<< xAngle_Roll[i].x << " " << yAngle_Pitch[i].x << " " << zAngle_Yaw[i].x << std::endl;
+		//file << time[i + 1].x << " " << xc[i + 1].x << " " << yc[i + 1].x << " " << zc[i + 1].x  << std::endl;
+
 
 		if (i % loadingbar == 0)
 		{

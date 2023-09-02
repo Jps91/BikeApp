@@ -16,6 +16,7 @@
 #include "GPS.h"
 #include "GYRO.h"
 #include "MAGNET.h"
+#include "Rotaion.h"
 
 #include "DcmAlgorithm.h"
 
@@ -185,8 +186,11 @@ void gettimediff()
 }
 
 
+
 int main()
 {
+
+
 	//extract();
 	//stage2();
 	//gettimediff();
@@ -232,13 +236,18 @@ int main()
 
 	std::string path("\\\\DESKTOP-D42KUL4\\No_skript\\" + folder + "\\");
 
+	
+
+
+
+
 
 	//ACG acc(path);
 	//for (size_t i = 0; i < acc.entries; i++)
 	{
 		//std::cout << acc.a[i].x << std::endl;
 	}
-	MAGNET mag(path);
+	//MAGNET mag(path);
 	//ACG acg(path);
 	//GYRO gyro(path);
 	/*for (size_t i = 0; i < mag.entries; i++)
@@ -252,8 +261,8 @@ int main()
 	//DcmAlgorithm dc{};
 	//int gtime = gyro.entries / mag.entries;
 	//int acgtime = acg.entries / mag.entries;
-	for (size_t i = 0; i < mag.entries; i++)
-	{
+	//for (size_t i = 0; i < mag.entries; i++)
+	//{
 		/*
 		if (i * gtime < gyro.entries && i * acgtime < acg.entries)
 
@@ -266,8 +275,8 @@ int main()
 		}*/
 		//std::cout << abs(mag.x[i].x) + abs(mag.y[i].x) + abs(mag.z[i].x) << std::endl;
 
-	}
-	mag.calibrate();
+	//}
+	/*mag.calibrate();
 	std::cout << mag.xlow.x << "	" << mag.xhigh.x << std::endl;
 	std::cout << mag.ylow.x << "	" << mag.yhigh.x << std::endl;
 	std::cout << mag.zlow.x << "	" << mag.zhigh.x << std::endl;
@@ -280,11 +289,32 @@ int main()
 	//system("pause");
 	mag.rotationToNoth();
 	mag.store();
-
+	//system("pause");
 	GPS gps(path);
-	gps.terrain();
-	GYRO gyro(path);
-	gyro.positon();
+	//gps.terrain();
+	GYRO gyro(path,0,0,0);
+	gyro.rotation();
+	//gyro.positon();
 	gyro.store();
+	system("pause");
+
+	ACG acg(path);
+	double magtime = static_cast<double>(mag.entries) / acg.entries;
+	std::fstream file{"C:\\1_Jan\\DataServerClient\\Projekte\\BikeApp\\SensorBox\\ENDLESS_23_06_2023_16_27_03\\Log.csv", std::ios::trunc | std::ios::out};
+	for (size_t i = 0; i < mag.entries; i++)
+	{
+		file << mag.time[i].x << " ";
+		file << (1 / mag.avergaeDistance.x * mag.xc[i].x) * 9.81 << " ";
+		file << (1 / mag.avergaeDistance.x * mag.yc[i].x) * 9.81 << " ";
+		file << (1 / mag.avergaeDistance.x * mag.zc[i].x) * 9.81;
+		file << std::endl;
+	}
+	file.close();
+	acg.gravityFix(mag.zAngle_Yaw, mag.yAngle_Pitch, mag.xAngle_Roll);
+	acg.betterspeed();
+	acg.position();
+	acg.store();*/
+	Rotaion rot(path);
+
 }
 

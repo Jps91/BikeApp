@@ -10,6 +10,7 @@
 class MAGNET
 {
 public:
+	const double pi = 3.1415926535897932385;
 	std::vector<_CRT_DOUBLE> time;
 
 	std::vector<_CRT_DOUBLE>x;
@@ -21,16 +22,12 @@ public:
 	std::vector<_CRT_DOUBLE>zc;
 
 
-	std::vector<_CRT_DOUBLE>xAngle;
-	std::vector<_CRT_DOUBLE>yAngle;
-	std::vector<_CRT_DOUBLE>zAngle;
+	std::vector<_CRT_DOUBLE>xAngle_Roll;
+	std::vector<_CRT_DOUBLE>yAngle_Pitch;
+	std::vector<_CRT_DOUBLE>zAngle_Yaw;
 
 	std::vector<_CRT_DOUBLE>elipsoidDistance;
 	_CRT_DOUBLE avergaeDistance{};
-
-	std::vector<_CRT_DOUBLE>a;
-	std::vector<_CRT_DOUBLE>b;
-	std::vector<_CRT_DOUBLE>c;
 
 	_CRT_DOUBLE xlow{};
 	_CRT_DOUBLE ylow{};

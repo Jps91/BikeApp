@@ -19,7 +19,7 @@ public:
 	std::vector<_CRT_DOUBLE> horizontalAccuracy;
 	std::vector<_CRT_DOUBLE> verticalAccuracy;
 	size_t entries = 0;
-	GPS(std::string);
+	GPS(std::string filePath);
 	void terrain();
 	~GPS();
 private:

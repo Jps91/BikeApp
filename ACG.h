@@ -18,6 +18,15 @@ public:
 	std::vector<_CRT_DOUBLE>ay;
 	std::vector<_CRT_DOUBLE>az;
 
+	std::vector<_CRT_DOUBLE>awg;
+	std::vector<_CRT_DOUBLE>axwg;
+	std::vector<_CRT_DOUBLE>aywg;
+	std::vector<_CRT_DOUBLE>azwg;
+
+	std::vector<_CRT_DOUBLE>axNorthg;
+	std::vector<_CRT_DOUBLE>ayEastg;
+	std::vector<_CRT_DOUBLE>azDowng;
+
 	std::vector<_CRT_DOUBLE>v;
 	std::vector<_CRT_DOUBLE>vx;
 	std::vector<_CRT_DOUBLE>vy;
@@ -35,14 +44,14 @@ public:
 	void store();
 	//bool setByTime(long long time_nano_seconds);
 	unsigned long long entries = 0;
+	void betterspeed();
+	void gravityFix( std::vector<_CRT_DOUBLE>&yaw, std::vector<_CRT_DOUBLE>&pitch, std::vector<_CRT_DOUBLE>&roll);
+	void speed();
+	void position();
 	~ACG();
 private:
 	std::string fileName_m = "Accelerometer.csv";
 	long long currentTime;
 	bool status = true;
-
-	void betterspeed();
-	void speed();
-	void position();
 };
 
